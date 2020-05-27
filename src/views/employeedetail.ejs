@@ -6,36 +6,51 @@
       Find all the information that you need regarding the Employee.
     </p>
     <hr class="my-4" />
+  </div>
+  <div class="row bg-primary">
     <div class="col-lg-12">
       <h2>Employee Detail</h2>
     </div>
-    <!--Start-->
-    <% employeeDetail.forEach((employee)=>{ %>
-    <div class="card mb-3 col-lg-4">
-      <h3 class="card-header alert-heading"><%=employee.name %></h3>
-      <!-- <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-      </div> -->
-      <img
-        style="height: 200px; width: 100%; display: block;"
-        src="<%= employee.avatar %>"
-        alt="<%=employee.name %>"
-      />
-      <div class="card-body">
-        <p class="card-text">
-          <h4>Project worked on</h4>
-        </p>
+  </div>
+  <!--Start -->
+  <div class="row mt-3 mr-0">
+    <!--Start Employee Detail-->
+    <div class="col-lg-4">
+      <% emplDetArr.forEach((employee)=>{ %>
+      <div class="card mb-3">
+        <h3 class="card-header"><%=employee.name %></h3>
+        <img
+          style="height: 200px; width: 100%; display: block;"
+          src="<%= employee.avatar %>"
+          alt="<%=employee.name %>"
+        />
+        <!-- <div class="card-footer text-muted">
+          <a href="/" class="card-link">Employee List</a>
+        </div> -->
       </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cras justo odio</li>
-      </ul>
-      <div class="card-body">
-        <a href="/" class="card-link">Employee List</a>
+      <% }); %>
+    </div>
+    <!--End Employee Detail-->
+
+    <!--Start Project Detail-->
+    <div class="col-lg-8">
+      <div class="card border-secondary mb-3">
+        <div class="card-header"><h4 class="alert-heading">Projects</h4></div>
+        <div class="card-body">
+          <% if (emplProArr.length > 0) { emplProArr.forEach((employeeP)=> { %>
+          <h4 class="card-title"><%=employeeP.name %></h4>
+          <p class="card-text"><%=employeeP.Detail %></p>
+          <% }); } else { %>
+          <p>No Project found. Try again later</p>
+          <% } %>
+        </div>
       </div>
     </div>
-    <% }); %>
-    <!--End-->
+    <!--End Project Detail-->
+    <div class="col-lg-12 text-right font-bold">
+      <a href="/" class="card-link"><strong>Employee's List</strong></a>
+    </div>
   </div>
 </div>
+<!--End-->
 <%- include('footer') %>
