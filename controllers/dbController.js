@@ -5,6 +5,11 @@ const dbEmployee = new Promise((resolve, reject) => resolve(dbReader("./db/emplo
 const dbProject = new Promise((resolve, reject) => resolve(dbReader("./db/projectDb.json")));
 const dbEmpProj = new Promise((resolve, reject) => resolve(dbReader("./db/employeeProject.json")));
 
+let emplDetArr = [];
+let emplProArr = [];
+let employeeId;
+let isDetailNeeded = false;
+
 let dbController = {
 
     findAllEmployee: function (req, res) {
@@ -13,10 +18,20 @@ let dbController = {
             .then((datas) => res.render("main", { listEmployeeArray: JSON.parse(datas) }))
             .catch((err) => console.log(err));
     },
-    getEmployeeDetail: function (req, res) {
+    getEmployeeData: function (req, res) {
 
-        let emplDetArr = [];
-        let emplProArr = [];
+        dbEmployee
+            .then((employee) => {
+
+                let listEmployeeArray = JSON.parse(employee);
+                employeeId = req.params.id;
+
+                emplDetArr = listEmployeeArray.filter((emp) => emp.id == employeeId);
+
+                res.render("employeedetail", { emplDetArr, isDetailNeeded });
+            });
+    },
+    getEmployeeDetail: function (req, res) {
 
         Promise.all([dbEmployee, dbProject, dbEmpProj])
             .then((datas) => {
@@ -26,16 +41,31 @@ let dbController = {
                 let listEmployeeProject = JSON.parse(datas[2]);
 
                 //Getting employee details 
-                let employeeId = req.params.id;
+                employeeId = req.params.id;
                 emplDetArr = listEmployeeArray.filter((employee) => employee.id == employeeId);
 
                 //Getting list of employee Projects
                 let listEmpProj = listEmployeeProject.filter((project) => project.employeeId == employeeId);
                 listEmpProj.forEach(id => listProjectArray.forEach((project) => (project.id == id.projectId) && emplProArr.push(project)));
+                isDetailNeeded = true;
 
-                res.render("employeedetail", { emplDetArr, emplProArr });
+                res.render("employeedetail", { emplDetArr, emplProArr, isDetailNeeded });
 
             }).catch((err) => console.log(err));
+    },
+    getProjectDetail: function (req, res) {
+
+        dbProject
+            .then((project) => {
+
+                let projectArr = JSON.parse(project);
+                let projectId = parseInt(req.params.id);
+                let projectDetail;
+
+                (projectId) ? projectDetail = projectArr.filter((datas) => datas.id === projectId) : projectDetail = projectArr;
+
+                res.send(projectDetail);
+            });
     }
 };
 
