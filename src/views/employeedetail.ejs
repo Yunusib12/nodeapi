@@ -1,0 +1,41 @@
+<%- include('head') %>
+<div class="container">
+  <div class="jumbotron mt-5">
+    <h1 class="display-3">Welcome to Node Express API</h1>
+    <p class="lead">
+      Find all the information that you need regarding the Employee.
+    </p>
+    <hr class="my-4" />
+    <div class="col-lg-12">
+      <h2>Employee Detail</h2>
+    </div>
+    <!--Start-->
+    <% employeeDetail.forEach((employee)=>{ %>
+    <div class="card mb-3 col-lg-4">
+      <h3 class="card-header alert-heading"><%=employee.name %></h3>
+      <!-- <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+      </div> -->
+      <img
+        style="height: 200px; width: 100%; display: block;"
+        src="<%= employee.avatar %>"
+        alt="<%=employee.name %>"
+      />
+      <div class="card-body">
+        <p class="card-text">
+          <h4>Project worked on</h4>
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Cras justo odio</li>
+      </ul>
+      <div class="card-body">
+        <a href="/" class="card-link">Employee List</a>
+      </div>
+    </div>
+    <% }); %>
+    <!--End-->
+  </div>
+</div>
+<%- include('footer') %>
