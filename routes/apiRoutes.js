@@ -2,13 +2,13 @@ const routes = require('express').Router();
 const dbController = require('../controllers/dbController');
 
 //Default Route
-routes
-    .route("/")
-    .get(dbController.findAllEmployee);
+// routes
+//     .route("/")
+//     .get(dbController.findAllEmployee);
 
 //Get employee Detail Route
 routes
-    .route("/api/employee/:id")
+    .route("/api/employee/:id?")
     .get(dbController.getEmployeeData);
 
 //Get employee Detail plus Project assigned to him
