@@ -13,13 +13,8 @@ routes
 
 //Get employee Detail plus Project assigned to him
 routes
-    .route("/api/getemployeedetails")
+    .route("/api/getemployeedetails/:id?")
     .get(dbController.getEmployeeDetail);
-
-//Get Projects list
-// routes
-//     .route("/api/project")
-//     .get(dbController.getAllProject);
 
 //Get Single Project Detail
 routes

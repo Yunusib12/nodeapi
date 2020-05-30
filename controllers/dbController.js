@@ -27,6 +27,7 @@ let dbController = {
                 employeeId = req.params.id;
 
                 emplDetArr = listEmployeeArray.filter((emp) => emp.id == employeeId);
+                isDetailNeeded = false;
 
                 res.render("employeedetail", { emplDetArr, isDetailNeeded });
             });
@@ -49,8 +50,46 @@ let dbController = {
                 listEmpProj.forEach(id => listProjectArray.forEach((project) => (project.id == id.projectId) && emplProArr.push(project)));
                 isDetailNeeded = true;
 
-                res.render("employeedetail", { emplDetArr, emplProArr, isDetailNeeded });
+                if (employeeId) {
 
+                    res.render("employeedetail", { emplDetArr, emplProArr, isDetailNeeded });
+                } else {
+
+                    //Construct the Employee's Profile
+                    let employeeProfile = [];
+
+                    listEmployeeArray.forEach((employee) => {
+
+                        employeeProfile.push({
+                            "id": employee.id,
+                            "createdAt": employee.createdAt,
+                            "name": employee.name,
+                            "project": listEmployeeProject.filter((project) => (project.employeeId == employee.id))
+                        });
+
+
+                        // listEmployeeProject.map((employeeProject) => {
+
+
+
+                        //     if (employee.id == employeeProject.employeeId) {
+
+                        //         listProjectArray.map((project) => {
+
+                        //             if (employeeProject.projectId == project.id) {
+                        //                 console.log(employee, project, employee.id);
+                        //             }
+                        //         });
+                        //     }
+
+                        // });
+
+
+
+                    });
+
+                    res.send(employeeProfile);
+                }
             }).catch((err) => console.log(err));
     },
     getProjectDetail: function (req, res) {
