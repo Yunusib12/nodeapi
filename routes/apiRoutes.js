@@ -1,10 +1,10 @@
 const routes = require('express').Router();
 const dbController = require('../controllers/dbController');
 
-//Default Route
-// routes
-//     .route("/")
-//     .get(dbController.findAllEmployee);
+// Default Route
+routes
+    .route("/")
+    .get(dbController.findAllEmployee);
 
 //Get employee Detail Route
 routes

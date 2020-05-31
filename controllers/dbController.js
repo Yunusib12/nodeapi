@@ -11,6 +11,13 @@ let isDetailNeeded = false;
 
 let dbController = {
 
+    findAllEmployee: function (req, res) {
+
+        dbEmployee
+            .then((datas) => res.render("main", { listEmployeeArray: JSON.parse(datas) }))
+            .catch((err) => console.log(err));
+
+    },
     getEmployeeData: function (req, res) {
 
         dbEmployee
