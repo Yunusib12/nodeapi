@@ -8,8 +8,8 @@
  * id didn't exist, so send 404. Otherwise redirect back to the list.
  */
 
-import * as employeeRepository from '../repositories/employeeRepository.js';
-import { HTTP_NOT_FOUND } from '../inc/constant.js';
+import { employeeRepository } from '../repositories/index.js';
+import { HTTP_NOT_FOUND } from '../inc/index.js';
 
 function deleteEmployee(req, res, next) {
     try {

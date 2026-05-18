@@ -7,9 +7,8 @@
  *   without an id -> the profile for every employee
  */
 
-import * as employeeRepository from '../repositories/employeeRepository.js';
-import * as projectRepository from '../repositories/projectRepository.js';
-import { HTTP_NOT_FOUND } from '../inc/constant.js';
+import { employeeRepository, projectRepository } from '../repositories/index.js';
+import { HTTP_NOT_FOUND } from '../inc/index.js';
 
 // Build the response shape for one employee: their info + their project(s).
 function toProfile(employee) {

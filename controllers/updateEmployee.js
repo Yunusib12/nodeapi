@@ -8,9 +8,8 @@
  * was not found send 404, otherwise redirect back to the home list.
  */
 
-import * as employeeRepository from '../repositories/employeeRepository.js';
-import * as projectRepository from '../repositories/projectRepository.js';
-import { VIEW_EMPLOYEE_FORM, HTTP_NOT_FOUND } from '../inc/constant.js';
+import { employeeRepository, projectRepository } from '../repositories/index.js';
+import { VIEW_EMPLOYEE_FORM, HTTP_NOT_FOUND } from '../inc/index.js';
 
 function updateEmployee(req, res, next) {
     try {

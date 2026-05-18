@@ -7,7 +7,7 @@
  */
 
 import { loadJson } from './jsonStore.js';
-import { DB_PROJECT_PATH } from '../inc/constant.js';
+import { DB_PROJECT_PATH } from '../inc/index.js';
 
 // Read the projects JSON file into memory a single time at import.
 const projects = loadJson(DB_PROJECT_PATH);

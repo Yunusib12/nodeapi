@@ -16,7 +16,7 @@ import path from "path";                 // helps build correct file-system path
 import { fileURLToPath } from "url";     // converts an ES-module URL to a normal path
 import routes from "./routes/index.js";  // all of our application routes
 import { notFound, errorHandler } from "./middleware/index.js"; // 404 + error handlers
-import { PUBLIC_DIR, VIEW_ENGINE, VIEWS_DIR } from "./inc/constant.js";
+import { PUBLIC_DIR, VIEW_ENGINE, VIEWS_DIR } from "./inc/index.js";
 
 // __dirname is not available in ES modules by default, so we recreate it.
 // It is the absolute path of the folder this file lives in.

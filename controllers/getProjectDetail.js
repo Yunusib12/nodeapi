@@ -6,8 +6,8 @@
  *   with    an id -> a 1-element array with that project (404 if missing)
  */
 
-import * as projectRepository from '../repositories/projectRepository.js';
-import { HTTP_NOT_FOUND } from '../inc/constant.js';
+import { projectRepository } from '../repositories/index.js';
+import { HTTP_NOT_FOUND } from '../inc/index.js';
 
 function getProjectDetail(req, res, next) {
 

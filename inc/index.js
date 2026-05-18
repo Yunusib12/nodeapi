@@ -1,10 +1,10 @@
 /**
- * inc/constant.js — every "magic value" in the app lives here.
+ * inc/index.js — every "magic value" in the app lives here.
  *
  * Why centralize constants? So there is ONE place to change a value, and so
  * the rest of the code reads with names (HTTP_NOT_FOUND) instead of numbers
  * (404). Import only what you need, e.g.:
- *   import { HTTP_NOT_FOUND } from "../inc/constant.js";
+ *   import { HTTP_NOT_FOUND } from "../inc/index.js";
  *
  * Note: "dotenv/config" is imported in app.js BEFORE this file is used, so
  * process.env is already populated when PORT below is evaluated.

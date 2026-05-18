@@ -10,8 +10,8 @@
  * passing the list to the page as `listEmployeeArray`.
  */
 
-import * as employeeRepository from '../repositories/employeeRepository.js';
-import { VIEW_MAIN } from '../inc/constant.js';
+import { employeeRepository } from '../repositories/index.js';
+import { VIEW_MAIN } from '../inc/index.js';
 
 function findAllEmployee(req, res, next) {
 

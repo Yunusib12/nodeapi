@@ -9,8 +9,8 @@
  * reused for both creating and editing.
  */
 
-import * as projectRepository from '../repositories/projectRepository.js';
-import { VIEW_EMPLOYEE_FORM } from '../inc/constant.js';
+import { projectRepository } from '../repositories/index.js';
+import { VIEW_EMPLOYEE_FORM } from '../inc/index.js';
 
 function showCreateEmployeeForm(req, res, next) {
     try {

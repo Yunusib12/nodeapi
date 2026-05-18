@@ -9,9 +9,8 @@
  *      where the new employee now appears in the list.
  */
 
-import * as employeeRepository from '../repositories/employeeRepository.js';
-import * as projectRepository from '../repositories/projectRepository.js';
-import { VIEW_EMPLOYEE_FORM } from '../inc/constant.js';
+import { employeeRepository, projectRepository } from '../repositories/index.js';
+import { VIEW_EMPLOYEE_FORM } from '../inc/index.js';
 
 function createEmployee(req, res, next) {
     try {

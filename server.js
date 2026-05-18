@@ -12,7 +12,7 @@
  */
 
 import app from "./app.js";              // the configured Express application
-import { PORT } from "./inc/constant.js"; // which port to listen on (from .env)
+import { PORT } from "./inc/index.js"; // which port to listen on (from .env)
 
 // Start the web server. The callback runs once the server is ready.
 app.listen(PORT, () => console.log(`The server is listening on port ${PORT}`));

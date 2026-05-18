@@ -12,7 +12,7 @@
  */
 
 import { loadJson, saveJson } from './jsonStore.js';
-import { DB_EMPLOYEE_PATH } from '../inc/constant.js';
+import { DB_EMPLOYEE_PATH } from '../inc/index.js';
 
 // Read the JSON file into memory a single time when this module is first imported.
 const employees = loadJson(DB_EMPLOYEE_PATH);

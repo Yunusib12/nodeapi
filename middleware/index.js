@@ -20,7 +20,7 @@ import {
     MSG_NOT_FOUND,
     MSG_SERVER_ERROR,
     MSG_GENERIC_ERROR
-} from "../inc/constant.js";
+} from "../inc/index.js";
 
 /**
  * notFound — catch-all for unknown routes.

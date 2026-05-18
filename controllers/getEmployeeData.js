@@ -9,9 +9,8 @@
  * If an id is given but no such employee exists, send a 404 error.
  */
 
-import * as employeeRepository from '../repositories/employeeRepository.js';
-import * as projectRepository from '../repositories/projectRepository.js';
-import { VIEW_EMPLOYEE_DETAIL, HTTP_NOT_FOUND } from '../inc/constant.js';
+import { employeeRepository, projectRepository } from '../repositories/index.js';
+import { VIEW_EMPLOYEE_DETAIL, HTTP_NOT_FOUND } from '../inc/index.js';
 
 function getEmployeeData(req, res, next) {
 

@@ -6,9 +6,8 @@
  * If the id doesn't exist, send a 404.
  */
 
-import * as employeeRepository from '../repositories/employeeRepository.js';
-import * as projectRepository from '../repositories/projectRepository.js';
-import { VIEW_EMPLOYEE_FORM, HTTP_NOT_FOUND } from '../inc/constant.js';
+import { employeeRepository, projectRepository } from '../repositories/index.js';
+import { VIEW_EMPLOYEE_FORM, HTTP_NOT_FOUND } from '../inc/index.js';
 
 function showEditEmployeeForm(req, res, next) {
     try {
