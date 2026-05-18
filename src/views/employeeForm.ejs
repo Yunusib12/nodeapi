@@ -1,0 +1,91 @@
+<%#
+  employeeForm.ejs — ONE form reused for both Add and Edit.
+
+  Expects:
+    mode      - "create" or "edit" (changes the submit button label)
+    formTitle - heading text
+    action    - URL the form POSTs to (create or update route)
+    employee  - field values (blank object when creating)
+    projects  - all projects, for the dropdown
+    error     - validation message to show, or null
+
+  Submitting POSTs to `action`; the matching controller validates and
+  either re-renders this form with `error` set, or redirects to "/".
+%>
+<%- include('head', { title: formTitle }) %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb bg-white shadow-sm">
+    <li class="breadcrumb-item"><a href="/">Employees</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= formTitle %></li>
+  </ol>
+</nav>
+
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-header"><h4 class="mb-0"><%= formTitle %></h4></div>
+      <div class="card-body">
+
+        <% if (error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+
+        <form action="<%= action %>" method="POST">
+          <div class="form-group">
+            <label for="name">Name <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              value="<%= employee.name || '' %>"
+              placeholder="e.g. Jane Doe"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="avatar">Avatar URL</label>
+            <input
+              type="url"
+              class="form-control"
+              id="avatar"
+              name="avatar"
+              value="<%= employee.avatar || '' %>"
+              placeholder="Leave blank to auto-generate from the name"
+            />
+            <small class="form-text text-muted">
+              Optional. If empty, an avatar is generated automatically.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="projectId">Project</label>
+            <select class="form-control" id="projectId" name="projectId">
+              <option value="">— None —</option>
+              <% projects.forEach((project)=>{ %>
+              <option
+                value="<%= project.id %>"
+                <%= String(employee.projectId) === String(project.id) ? 'selected' : '' %>
+              >
+                <%= project.name %>
+              </option>
+              <% }); %>
+            </select>
+          </div>
+
+          <div class="d-flex">
+            <button type="submit" class="btn btn-primary">
+              <%= mode === 'create' ? 'Create Employee' : 'Save Changes' %>
+            </button>
+            <a href="/" class="btn btn-link ml-2">Cancel</a>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('footer') %>

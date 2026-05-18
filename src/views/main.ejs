@@ -1,13 +1,18 @@
-<%- include('head') %>
-<div class="container">
-  <div class="jumbotron mt-3">
-    <h1 class="display-3">Welcome to Node Express API</h1>
-    <p class="lead">
-      Find all the information that you need regarding the Employee.
-    </p>
-    <hr class="my-4" />
-    <p></p>
-  </div>
-  <%- include('listemployee') %>
+<%#
+  main.ejs — the HOME PAGE (rendered by findAllEmployee for GET "/").
+
+  Expects: listEmployeeArray  (array of all employees)
+  Shows an intro banner, then delegates the actual list to listemployee.ejs.
+%>
+<%- include('head', { title: 'Employees' }) %>
+
+<div class="jumbotron bg-white shadow-sm">
+  <h1 class="display-4">Employee Directory</h1>
+  <p class="lead mb-0">
+    Browse, add, edit and remove employees and their assigned projects.
+  </p>
 </div>
+
+<%- include('listemployee') %>
+
 <%- include('footer') %>

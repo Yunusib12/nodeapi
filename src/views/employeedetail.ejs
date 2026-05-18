@@ -1,58 +1,67 @@
-<%- include('head') %>
-<div class="container">
-  <div class="jumbotron mt-5">
-    <h1 class="display-3">Welcome to Node Express API</h1>
-    <p class="lead">
-      Find all the information that you need regarding the Employee.
-    </p>
-    <hr class="my-4" />
-  </div>
-  <div class="row bg-primary">
-    <div class="col-lg-12">
-      <h2>Employee Detail</h2>
-    </div>
-  </div>
-  <!--Start -->
-  <div class="row mt-3 mr-0">
-    <!--Start Employee Detail-->
-    <div class="col-lg-4">
-      <% emplDetArr.forEach((employee)=>{ %>
-      <div class="card mb-3">
-        <h3 class="card-header"><%=employee.name %></h3>
-        <img
-          style="height: 200px; width: 100%; display: block;"
-          src="<%= employee.avatar %>"
-          alt="<%=employee.name %>"
-        />
-        <!-- <div class="card-footer text-muted">
-          <a href="/" class="card-link">Employee List</a>
-        </div> -->
-      </div>
-      <% }); %>
-    </div>
-    <!--End Employee Detail-->
+<%#
+  employeedetail.ejs — one employee plus their project(s).
+  Rendered by getEmployeeData for GET "/api/employee/:id".
 
-    <!--Start Project Detail-->
-    <% if (isDetailNeeded==true) { %>
-    <div class="col-lg-8">
-      <div class="card border-secondary mb-3">
-        <div class="card-header"><h4 class="alert-heading">Projects</h4></div>
-        <div class="card-body">
-          <% if (emplProArr.length > 0) { emplProArr.forEach((employeeP)=> { %>
-          <h4 class="card-title"><%=employeeP.name %></h4>
-          <p class="card-text"><%=employeeP.Detail %></p>
-          <% }); } else { %>
-          <p>No Project found. Try again later</p>
-          <% } %>
-        </div>
+  Expects:
+    emplDetArr     - array containing the single employee
+    emplProArr     - array of that employee's project(s) (0 or 1)
+    isDetailNeeded - when true, show the Projects panel
+%>
+<% const emp = emplDetArr[0]; %>
+<%- include('head', { title: emp ? emp.name : 'Employee Detail' }) %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb bg-white shadow-sm">
+    <li class="breadcrumb-item"><a href="/">Employees</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= emp ? emp.name : 'Detail' %></li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-lg-4 mb-4">
+    <% emplDetArr.forEach((employee)=>{ %>
+    <div class="card h-100 shadow-sm">
+      <div class="card-header"><h3 class="mb-0"><%= employee.name %></h3></div>
+      <div class="card-body d-flex align-items-center justify-content-center">
+        <img
+          class="img-fluid rounded"
+          style="max-height: 240px; object-fit: contain;"
+          src="<%= employee.avatar %>"
+          alt="<%= employee.name %>"
+        />
+      </div>
+      <div class="card-footer bg-white d-flex">
+        <a class="btn btn-sm btn-outline-secondary mr-2" href="/api/employee/<%= employee.id %>/edit">Edit</a>
+        <form
+          action="/api/employee/<%= employee.id %>/delete"
+          method="POST"
+          class="ml-auto"
+          data-confirm="Delete <%= employee.name %>?"
+        >
+          <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
       </div>
     </div>
-    <% } %>
-    <!--End Project Detail-->
-    <div class="col-lg-12 text-right font-bold">
-      <a href="/" class="card-link"><strong>Employee's List</strong></a>
+    <% }); %>
+  </div>
+
+  <% if (isDetailNeeded == true) { %>
+  <div class="col-lg-8 mb-4">
+    <div class="card border-secondary h-100 shadow-sm">
+      <div class="card-header"><h4 class="mb-0">Projects</h4></div>
+      <div class="card-body">
+        <% if (emplProArr.length > 0) { emplProArr.forEach((employeeP)=> { %>
+        <h5 class="card-title text-primary"><%= employeeP.name %></h5>
+        <p class="card-text"><%= employeeP.Detail %></p>
+        <% }); } else { %>
+        <p class="text-muted mb-0">No project assigned.</p>
+        <% } %>
+      </div>
     </div>
   </div>
+  <% } %>
 </div>
-<!--End-->
+
+<a href="/" class="btn btn-link pl-0">&larr; Back to Employees</a>
+
 <%- include('footer') %>
