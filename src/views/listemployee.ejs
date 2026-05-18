@@ -1,12 +1,50 @@
-<div class="row bg-primary mb-3">
-  <div class="col-lg-12">
-    <h2>Employee List</h2>
-  </div>
+<%#
+  listemployee.ejs — the employee card grid, included by main.ejs.
+
+  Expects: listEmployeeArray  (array of employees)
+  For each employee it renders a card with avatar/name and three
+  actions: View (detail page), Edit (form), and Delete (a POST form;
+  data-confirm triggers the confirm dialog in app.js). If the list is
+  empty it shows a friendly "no employees yet" message instead.
+%>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">Employees <span class="badge badge-secondary"><%= listEmployeeArray.length %></span></h2>
+  <a class="btn btn-primary" href="/api/employee/new">+ Add Employee</a>
 </div>
-<ul class="list-group">
+
+<% if (listEmployeeArray.length === 0) { %>
+<div class="alert alert-info">No employees yet. Click <strong>Add Employee</strong> to create one.</div>
+<% } else { %>
+<div class="row">
   <% listEmployeeArray.forEach((employee)=>{ %>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    <a href="/api/employee/<%= employee.id %>"><%=employee.name %> </a>
-  </li>
+  <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body d-flex align-items-center">
+        <img
+          src="<%= employee.avatar %>"
+          alt="<%= employee.name %>"
+          class="rounded-circle bg-light mr-3"
+          style="width: 64px; height: 64px; object-fit: contain;"
+        />
+        <div>
+          <h5 class="card-title mb-1"><%= employee.name %></h5>
+          <small class="text-muted">ID #<%= employee.id %></small>
+        </div>
+      </div>
+      <div class="card-footer bg-white d-flex">
+        <a class="btn btn-sm btn-outline-primary mr-2" href="/api/employee/<%= employee.id %>">View</a>
+        <a class="btn btn-sm btn-outline-secondary mr-2" href="/api/employee/<%= employee.id %>/edit">Edit</a>
+        <form
+          action="/api/employee/<%= employee.id %>/delete"
+          method="POST"
+          class="ml-auto"
+          data-confirm="Delete <%= employee.name %>?"
+        >
+          <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
   <% }); %>
-</ul>
+</div>
+<% } %>

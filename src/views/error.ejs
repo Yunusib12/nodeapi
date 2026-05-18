@@ -1,0 +1,19 @@
+<%#
+  error.ejs — the 404 / 500 page (rendered by middleware/index.js).
+
+  Expects:
+    status  - HTTP code (e.g. 404, 500)
+    message - short title (e.g. "Not Found")
+    url     - extra detail line (e.g. which route was missing)
+%>
+<%- include('head', { title: status + ' - ' + message }) %>
+
+<div class="jumbotron bg-white shadow-sm text-center">
+  <h1 class="display-1 text-danger mb-0"><%= status %></h1>
+  <h2 class="mb-3"><%= message %></h2>
+  <p class="lead text-muted"><%= url %></p>
+  <hr class="my-4" />
+  <a href="/" class="btn btn-primary">Go back to the home page</a>
+</div>
+
+<%- include('footer') %>

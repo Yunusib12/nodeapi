@@ -1,10 +1,32 @@
+<%#
+  head.ejs - the TOP half of every page (shared layout).
+
+  EJS templates live in src/views/ and are rendered by controllers via
+  res.render("name", data). In EJS, the tag with = prints an escaped
+  value, the tag with - includes another template, and the tag with #
+  (like this block) is a comment that produces no output.
+
+  This partial opens the html document, the head (CSS, page title), the
+  top navbar, and an open main container. footer.ejs closes them. Every
+  page does: include head, then its content, then include footer.
+  The `title` local is optional; a default is used when not passed.
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.min_2.css" />
     <link rel="stylesheet" href="/assets/css/style.css" />
-    <title>Node API</title>
+    <title><%= typeof title !== 'undefined' ? title : 'Node Employee API' %></title>
   </head>
-  <body></body>
-</html>
+  <body class="bg-light">
+    <nav class="navbar navbar-dark bg-primary shadow-sm mb-4">
+      <div class="container">
+        <a class="navbar-brand font-weight-bold" href="/">
+          &#128188; Employee Directory
+        </a>
+        <a class="btn btn-light btn-sm" href="/api/employee/new">+ Add Employee</a>
+      </div>
+    </nav>
+    <main class="container pb-5">
